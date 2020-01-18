@@ -1,0 +1,116 @@
+﻿@using BGL.Net.StarGazerGitHubSearch.Models
+@model BGL.Net.StarGazerGitHubSearch.Models.User
+
+@{
+    ViewBag.Title = "ResultsPage";
+}
+@{
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    
+</head>
+
+<body>
+    <style>
+        
+        table, th, td {
+            border: 2px solid black;
+            border-collapse: collapse;
+            margin: auto;
+            width: 70%;
+        }
+
+        th, td {
+            padding: 5px;
+            text-align:center;
+        }
+        description {
+            width: 1px;
+        }
+       
+    </style>
+    <div>
+        <H3>User Result</H3>
+        <table>
+
+            <tr>
+                <th>Name:</th>
+                <td>@Model.Name</td>
+            </tr>
+            <tr>
+                <th>Followers:</th>
+                <td>@Model.Followers</td>
+            </tr>
+            <tr>
+                <th>Following:</th>
+                <td>@Model.Following</td>
+            </tr>
+            <tr>
+                <th>Location:</th>
+                <td>@Model.Location</td>
+            </tr>
+            <tr>
+                <th>No of Repos:</th>
+                <td>@Model.PublicRepos</td>
+            </tr>
+            <tr>
+                <th>Profile Picture:</th>
+                <td><img src="@Url.Content(Model.AvatarUrl)" style="height:100px; width:100px " alt="Image" /></td>
+
+
+            </tr
+        </table>
+        <br />
+        <table>
+
+         <tr>
+             <th>name</th>
+             <th>ID</th>
+             <th class="description">Description</th>
+             <th>StarGazer_Count</th>
+
+         </tr>
+                @{ 
+                    int i = 0;
+
+                    while (i < 5)
+                    {
+
+                        foreach (var repository in Model.RepoList)
+                        {
+                            {
+                        <tr>
+                            <td> @repository.Name</td>
+                            
+                            <td> @repository.Id</td>
+                            
+                            <td id="Description"> @repository.Description</td>
+                         
+                            <td> @repository.StargazersCount</td>
+                        </tr>
+                                i++;
+
+                                if (i > 5)
+                                {
+
+                                    break;
+                                }
+                            }
+                        }
+                    }
+            }
+        </table>
+            @using (Html.BeginForm())
+            {
+                <br />
+                <br />
+                <input type="button" value="Return" onclick="location.href='@Url.Action("Index", "Search")'" />
+            }
+        </div>
+</body>
+</html>  

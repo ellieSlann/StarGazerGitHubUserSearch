@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BGL.Net.StarGazerGitHubSearch", "BGL.Net.StarGazerGitHubSearch\BGL.Net.StarGazerGitHubSearch.csproj", "{2B1C751E-A8E6-495D-AB27-F316E6410AC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BGL.Net.StarGazerGitHubSearch.DataAccess", "BGL.Net.StarGazerGitHubSearch.DataAccess\BGL.Net.StarGazerGitHubSearch.DataAccess.csproj", "{419C5089-BF74-4461-A834-3A5E43B87D0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BGL.Net.StarGazerGitHubSearch.Models", "BGL.Net.StarGazerGitHubSearch.Models\BGL.Net.StarGazerGitHubSearch.Models.csproj", "{EB47C972-2858-4364-8066-70C58265F3CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BGL.Net.StarGazerGitHubSearch.DataAccess.Tests", "BGL.Net.StarGazerGitHubSearch.DataAccess.Tests\BGL.Net.StarGazerGitHubSearch.DataAccess.Tests.csproj", "{537448A7-4CA2-43F0-B845-EAF2A593CCE3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B1C751E-A8E6-495D-AB27-F316E6410AC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B1C751E-A8E6-495D-AB27-F316E6410AC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B1C751E-A8E6-495D-AB27-F316E6410AC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B1C751E-A8E6-495D-AB27-F316E6410AC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{419C5089-BF74-4461-A834-3A5E43B87D0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{419C5089-BF74-4461-A834-3A5E43B87D0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{419C5089-BF74-4461-A834-3A5E43B87D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{419C5089-BF74-4461-A834-3A5E43B87D0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB47C972-2858-4364-8066-70C58265F3CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB47C972-2858-4364-8066-70C58265F3CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB47C972-2858-4364-8066-70C58265F3CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB47C972-2858-4364-8066-70C58265F3CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{537448A7-4CA2-43F0-B845-EAF2A593CCE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{537448A7-4CA2-43F0-B845-EAF2A593CCE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{537448A7-4CA2-43F0-B845-EAF2A593CCE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{537448A7-4CA2-43F0-B845-EAF2A593CCE3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F814DD12-3EF9-4DC7-AED4-4E9BEB7A1951}
+	EndGlobalSection
+EndGlobal

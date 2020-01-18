@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "SearchPage";
+}
+
+<h2>GitHub User Search</h2>
+<p>Input the name of User you want to search for.</p>
+
+    @using (Html.BeginForm())
+    {
+    <input type="text" name="searchUserName" />
+    <br />
+    <br />
+    <button id="SearchButton">Search</button>}
+
+
