@@ -22,10 +22,11 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess
         public async Task<List<RepoInformation>> GetRepoList(string searchUserName)
         {
             var uri = new Uri(GITHUBAPI + searchUserName + "/repos");
-            var httpRequestMessage = new HttpRequestMessage();
-            var responseMessage = await _wrapper.GetAsync(uri, httpRequestMessage).ConfigureAwait(false);
-            var repoResponseContent = await responseMessage.Content.ReadAsStringAsync();
-            var repos = JsonConvert.DeserializeObject<List<RepoInformation>>(repoResponseContent.ToString());
+
+            var responseMessage = await GetResponseMessage(uri);
+            var responseContent = await responseMessage.Content.ReadAsStringAsync();
+
+            var repos = JsonConvert.DeserializeObject<List<RepoInformation>>(responseContent.ToString());
             var topFiveRepos = GetTopFiveRepos(repos);
             return topFiveRepos;
         }
@@ -39,6 +40,12 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess
             return orderedRepoList.Take(5).ToList();
         }
 
+        private async Task<HttpResponseMessage> GetResponseMessage(Uri uri)
+        {
+            var httpRequestMessage = new HttpRequestMessage();
+            return await _wrapper.GetAsync(uri, httpRequestMessage).ConfigureAwait(false);
+        }
+
         public async Task<User> GetUser(string searchUserName)
         {
             if (string.IsNullOrWhiteSpace(searchUserName))
@@ -46,8 +53,8 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess
                 return new User();
             }
             var uri = new Uri(GITHUBAPI + searchUserName);
-            var httpRequestMessage = new HttpRequestMessage();
-            var responseMessage = await _wrapper.GetAsync(uri, httpRequestMessage).ConfigureAwait(false);
+
+            var responseMessage = await GetResponseMessage(uri);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var responseContent = await responseMessage.Content.ReadAsStringAsync();

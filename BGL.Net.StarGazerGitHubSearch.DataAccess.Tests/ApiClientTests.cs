@@ -108,79 +108,79 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
         [Test]
         public async Task GetRepoList_With_Valid_SearchUserName_Returns_RepoList()
         {
-            ////Arrange
-            //var httpClientWrapperMock = new Mock<IHttpClientWrapper>();
-            //httpClientWrapperMock.Setup(x => x.GetAsync(It.IsAny<Uri>(), It.IsAny<HttpRequestMessage>())).Returns(GetFakeHttpResponseMessage());
-            //var apiClient = new ApiClient(httpClientWrapperMock.Object);
-            //var expected = GetFakeRepoList();
+            //Arrange
+            var httpClientWrapperMock = new Mock<IHttpClientWrapper>();
+            httpClientWrapperMock.Setup(x => x.GetAsync(It.IsAny<Uri>(), It.IsAny<HttpRequestMessage>())).Returns(GetStubbedHttpResponseMessage());
+            var apiClient = new ApiClient(httpClientWrapperMock.Object);
+            var expected = GetStubbedRepoList();
 
-            ////Act
-            //var actual = await apiClient.GetRepoList("robconery");
+            //Act
+            var actual = await apiClient.GetRepoList("robconery");
 
-            ////Assert
-            //actual.Should().BeEquivalentTo(expected);
+            //Assert
+            actual.Should().BeEquivalentTo(expected);
         }
 
         [Test]
         public async Task GetRepoList_With_Empty_HttpResponseMessageContent_Returns_Empty_RepoList()
         {
-            ////Arrange
-            //var httpClientWrapperMock = new Mock<IHttpClientWrapper>();
-            //httpClientWrapperMock.Setup(x => x.GetAsync(It.IsAny<Uri>(), It.IsAny<HttpRequestMessage>())).Returns(GetFakeEmptyHttpResponseMessage());
-            //var apiClient = new ApiClient(httpClientWrapperMock.Object);
-            //var expected = new User();
+            //Arrange
+            var httpClientWrapperMock = new Mock<IHttpClientWrapper>();
+            httpClientWrapperMock.Setup(x => x.GetAsync(It.IsAny<Uri>(), It.IsAny<HttpRequestMessage>())).Returns(GetStubbedEmptyHttpResponseMessage());
+            var apiClient = new ApiClient(httpClientWrapperMock.Object);
+            var expected = new User();
 
-            ////Act
-            //var actual = await apiClient.GetUser("robconery");
+            //Act
+            var actual = await apiClient.GetUser("robconery");
 
-            ////Assert
-            //actual.Should().BeEquivalentTo(expected);
+            //Assert
+            actual.Should().BeEquivalentTo(expected);
         }
 
         [Test]
         public void GetRepoList_With_Invalid_HttpResponseMessageContent_Throws_JsonReaderException()
         {
-            ////Arrange
-            //var httpClientWrapperMock = new Mock<IHttpClientWrapper>();
-            //httpClientWrapperMock.Setup(x => x.GetAsync(It.IsAny<Uri>(), It.IsAny<HttpRequestMessage>())).Returns(GetFakeInvalidHttpResponseMessage());
-            //var apiClient = new ApiClient(httpClientWrapperMock.Object);
+            //Arrange
+            var httpClientWrapperMock = new Mock<IHttpClientWrapper>();
+            httpClientWrapperMock.Setup(x => x.GetAsync(It.IsAny<Uri>(), It.IsAny<HttpRequestMessage>())).Returns(GetStubbedInvalidHttpResponseMessage());
+            var apiClient = new ApiClient(httpClientWrapperMock.Object);
 
-            ////Act
-            //var ex = Assert.ThrowsAsync<JsonReaderException>(() => apiClient.GetUser("robconery"));
+            //Act
+            var ex = Assert.ThrowsAsync<JsonReaderException>(() => apiClient.GetUser("robconery"));
 
-            ////Assert
-            //Assert.IsTrue(ex.Message.Contains("Invalid JavaScript property identifier character:"));
+            //Assert
+            Assert.IsTrue(ex.Message.Contains("Invalid JavaScript property identifier character:"));
         }
 
         [Test]
         public async Task GetRepoList_With_Invalid_SearchUserName_Returns_Empty_RepoList()
         {
-            ////Arrange
-            //var httpClientWrapperMock = new Mock<IHttpClientWrapper>();
-            //httpClientWrapperMock.Setup(x => x.GetAsync(It.IsAny<Uri>(), It.IsAny<HttpRequestMessage>())).Returns(GetFakeNotFoundHttpResponseMessage());
-            //var apiClient = new ApiClient(httpClientWrapperMock.Object);
-            //var expected = new User();
+            //Arrange
+            var httpClientWrapperMock = new Mock<IHttpClientWrapper>();
+            httpClientWrapperMock.Setup(x => x.GetAsync(It.IsAny<Uri>(), It.IsAny<HttpRequestMessage>())).Returns(GetStubbedNotFoundHttpResponseMessage());
+            var apiClient = new ApiClient(httpClientWrapperMock.Object);
+            var expected = new User();
 
-            ////Act
-            //var actual = await apiClient.GetUser("robconery");
+            //Act
+            var actual = await apiClient.GetUser("robconery");
 
-            ////Assert
-            //actual.Should().BeEquivalentTo(expected);
+            //Assert
+            actual.Should().BeEquivalentTo(expected);
         }
 
         [Test]
         public async Task GetRepoList_With_Empty_SearchUSerName_Returns_Empty_RepoList()
         {
             //Arrange
-            //var httpClientWrapperMock = new Mock<IHttpClientWrapper>();
-            //var apiClient = new ApiClient(httpClientWrapperMock.Object);
-            //var expected = new User();
+            var httpClientWrapperMock = new Mock<IHttpClientWrapper>();
+            var apiClient = new ApiClient(httpClientWrapperMock.Object);
+            var expected = new User();
 
-            ////Act
-            //var actual = await apiClient.GetUser(string.Empty);
+            //Act
+            var actual = await apiClient.GetUser(string.Empty);
 
-            ////Assert
-            //actual.Should().BeEquivalentTo(expected);
+            //Assert
+            actual.Should().BeEquivalentTo(expected);
         }
 
         private static List<RepoInformation> GetStubbedRepoList()
