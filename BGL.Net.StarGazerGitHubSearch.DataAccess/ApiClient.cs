@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using BGL.Net.StarGazerGitHubSearch.Models;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace BGL.Net.StarGazerGitHubSearch.DataAccess
 {
@@ -25,7 +26,17 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess
             var responseMessage = await _wrapper.GetAsync(uri, httpRequestMessage).ConfigureAwait(false);
             var repoResponseContent = await responseMessage.Content.ReadAsStringAsync();
             var repos = JsonConvert.DeserializeObject<List<RepoInformation>>(repoResponseContent.ToString());
-            return repos;
+            var topFiveRepos = GetTopFiveRepos(repos);
+            return topFiveRepos;
+        }
+
+        private static List<RepoInformation> GetTopFiveRepos(List<RepoInformation> repos)
+        {
+            var orderedRepoList = from r in repos
+                                  orderby r.StargazersCount descending
+                                  select r;
+
+            return orderedRepoList.Take(5).ToList();
         }
 
         public async Task<User> GetUser(string searchUserName)
