@@ -38,13 +38,6 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
             actual.Should().BeEquivalentTo(expected);
         }
 
-        private async Task<Mock<IHttpClientWrapper>> SetUpMockHttpClientWrapperAsync(Task<HttpResponseMessage> stubbedResponseMessage)
-        {
-            httpClientWrapperMock.Setup(x => x.GetAsync(It.IsAny<Uri>(),
-                It.IsAny<HttpRequestMessage>())).Returns(stubbedResponseMessage);
-            return httpClientWrapperMock;
-        }
-
         [Test]
         public async Task GetUser_With_Empty_HttpResponseMessageContent_Returns_Empty_User()
         {
@@ -105,8 +98,6 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
             //Assert
             actual.Should().BeEquivalentTo(expected);
         }
-
-      
 
         [Test]
         public async Task GetRepoList_With_Valid_SearchUserName_Returns_RepoList()
@@ -272,6 +263,13 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
             };
 
             return await Task.FromResult(httpResponseMessage);
+        }
+
+        private async Task<Mock<IHttpClientWrapper>> SetUpMockHttpClientWrapperAsync(Task<HttpResponseMessage> stubbedResponseMessage)
+        {
+            httpClientWrapperMock.Setup(x => x.GetAsync(It.IsAny<Uri>(),
+                It.IsAny<HttpRequestMessage>())).Returns(stubbedResponseMessage);
+            return httpClientWrapperMock;
         }
     }
 }
