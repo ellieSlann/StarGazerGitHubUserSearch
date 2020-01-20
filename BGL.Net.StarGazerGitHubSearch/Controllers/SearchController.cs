@@ -15,22 +15,24 @@ namespace BGL.Net.StarGazerGitHubSearch.Controllers
 
         public ActionResult Index()
         {
+            ViewData.Model = true;
             return View("SearchPage");
         }
 
         [HttpPost]
         public async Task<ActionResult> Index(string searchUserName)
         {
+            var userName = HelperMethods.RemoveWhitespace(searchUserName);
             try
             {
-                var model = await _userModelBuilder.Build(searchUserName);
+                var model = await _userModelBuilder.Build(userName);
                 return View("ResultsPage", model);
             }
             catch
             {
-                return View("SearchPage",new User());
+                ViewData.Model = false;
+                return View("SearchPage");
             }
         }
-        
     }
 }
