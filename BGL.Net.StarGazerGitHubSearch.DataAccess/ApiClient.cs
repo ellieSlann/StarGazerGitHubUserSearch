@@ -31,21 +31,6 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess
             return topFiveRepos;
         }
 
-        private static List<RepoInformation> GetTopFiveRepos(List<RepoInformation> repos)
-        {
-            var orderedRepoList = from r in repos
-                                  orderby r.StargazersCount descending
-                                  select r;
-
-            return orderedRepoList.Take(5).ToList();
-        }
-
-        private async Task<HttpResponseMessage> GetResponseMessage(Uri uri)
-        {
-            var httpRequestMessage = new HttpRequestMessage();
-            return await _wrapper.GetAsync(uri, httpRequestMessage).ConfigureAwait(false);
-        }
-
         public async Task<User> GetUser(string searchUserName)
         {
             if (string.IsNullOrWhiteSpace(searchUserName))
@@ -63,5 +48,22 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess
             }
             return new User();
         }
+
+        private static List<RepoInformation> GetTopFiveRepos(List<RepoInformation> repos)
+        {
+            var orderedRepoList = from r in repos
+                                  orderby r.StargazersCount descending
+                                  select r;
+
+            return orderedRepoList.Take(5).ToList();
+        }
+
+        private async Task<HttpResponseMessage> GetResponseMessage(Uri uri)
+        {
+            var httpRequestMessage = new HttpRequestMessage();
+            return await _wrapper.GetAsync(uri, httpRequestMessage).ConfigureAwait(false);
+        }
+
+ 
     }
 }

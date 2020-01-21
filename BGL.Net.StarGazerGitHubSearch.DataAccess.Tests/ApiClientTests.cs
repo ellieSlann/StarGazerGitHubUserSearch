@@ -176,6 +176,18 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
             actual.Should().BeEquivalentTo(expected);
         }
 
+        [Test]
+        public void GetTopFiveReposWithValidRepoListShouldReturnOrderListWithFiveMembers()
+        {
+            //To do: Implement test
+        }
+
+        [Test]
+        public void GetResponseMessageWithValidUriShouldReturnTaskOfHttpResponseMessage()
+        {
+            //To do: Implement test
+        }
+
         private static User GetStubbedUser()
         {
             return new User

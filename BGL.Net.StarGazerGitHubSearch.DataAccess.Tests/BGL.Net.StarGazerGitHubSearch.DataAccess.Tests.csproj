@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="ApiClientTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="HttpClientWrapperTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
