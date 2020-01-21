@@ -14,12 +14,12 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
     [TestFixture]
     public class ApiClientTests
     {
-        protected Mock<IHttpClientWrapper> httpClientWrapperMock { get; set; }
+        protected Mock<IHttpClientWrapper> HttpClientWrapperMock { get; set; }
 
         [SetUp]
         public void SetUp()
         {
-            httpClientWrapperMock = new Mock<IHttpClientWrapper>();
+            HttpClientWrapperMock = new Mock<IHttpClientWrapper>();
         }
 
         [Test]
@@ -27,7 +27,7 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
         {
             //Arrange
             var stubbedResponseMessage = GetStubbedHttpResponseMessage(GetStubbedUser());
-            var httpClientWrapper = await SetUpMockHttpClientWrapperAsync(stubbedResponseMessage);
+            var httpClientWrapper = await SetUpMockHttpClientWrapper(stubbedResponseMessage);
             var apiClient = new ApiClient(httpClientWrapper.Object);
             var expected = GetStubbedUser();
             
@@ -43,7 +43,7 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
         {
             //Arrange
             var stubbedResponseMessage = GetStubbedEmptyHttpResponseMessage();
-            var httpClientWrapper = await SetUpMockHttpClientWrapperAsync(stubbedResponseMessage);
+            var httpClientWrapper = await SetUpMockHttpClientWrapper(stubbedResponseMessage);
             var apiClient = new ApiClient(httpClientWrapper.Object);
             var expected = new User();
 
@@ -59,7 +59,7 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
         {
             //Arrange
             var stubbedResponseMessage = GetStubbedInvalidHttpResponseMessage();
-            var httpClientWrapper = await SetUpMockHttpClientWrapperAsync(stubbedResponseMessage);
+            var httpClientWrapper = await SetUpMockHttpClientWrapper(stubbedResponseMessage);
             var apiClient = new ApiClient(httpClientWrapper.Object);
 
             //Act
@@ -74,7 +74,7 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
         {
             //Arrange
             var stubbedResponseMessage = GetStubbedNotFoundHttpResponseMessage();
-            var httpClientWrapper = await SetUpMockHttpClientWrapperAsync(stubbedResponseMessage);
+            var httpClientWrapper = await SetUpMockHttpClientWrapper(stubbedResponseMessage);
             var apiClient = new ApiClient(httpClientWrapper.Object);
             var expected = new User();
 
@@ -89,7 +89,7 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
         public async Task GetUser_With_Empty_SearchUserName_Returns_Empty_User()
         {
             //Arrange
-            var apiClient = new ApiClient(httpClientWrapperMock.Object);
+            var apiClient = new ApiClient(HttpClientWrapperMock.Object);
             var expected = new User();
 
             //Act
@@ -104,7 +104,7 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
         {
             //Arrange
             var stubbedResponseMessage = GetStubbedHttpResponseMessage(GetStubbedRepoList());
-            var httpClientWrapper = await SetUpMockHttpClientWrapperAsync(stubbedResponseMessage);
+            var httpClientWrapper = await SetUpMockHttpClientWrapper(stubbedResponseMessage);
             var apiClient = new ApiClient(httpClientWrapper.Object);
             var expected = GetStubbedRepoList();
 
@@ -120,7 +120,7 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
         {
             //Arrange
             var stubbedResponseMessage = GetStubbedEmptyHttpResponseMessage();
-            var httpClientWrapper = await SetUpMockHttpClientWrapperAsync(stubbedResponseMessage);
+            var httpClientWrapper = await SetUpMockHttpClientWrapper(stubbedResponseMessage);
             var apiClient = new ApiClient(httpClientWrapper.Object);
             var expected = new User();
 
@@ -136,7 +136,7 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
         {
             //Arrange
             var stubbedResponseMessage = GetStubbedInvalidHttpResponseMessage();
-            var httpClientWrapper = await SetUpMockHttpClientWrapperAsync(stubbedResponseMessage);
+            var httpClientWrapper = await SetUpMockHttpClientWrapper(stubbedResponseMessage);
             var apiClient = new ApiClient(httpClientWrapper.Object);
 
             //Act
@@ -151,7 +151,7 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
         {
             //Arrange
             var stubbedResponseMessage = GetStubbedNotFoundHttpResponseMessage();
-            var httpClientWrapper = await SetUpMockHttpClientWrapperAsync(stubbedResponseMessage);
+            var httpClientWrapper = await SetUpMockHttpClientWrapper(stubbedResponseMessage);
             var apiClient = new ApiClient(httpClientWrapper.Object);
             var expected = new User();
 
@@ -166,7 +166,7 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
         public async Task GetRepoList_With_Empty_SearchUSerName_Returns_Empty_RepoList()
         {
             //Arrange
-            var apiClient = new ApiClient(httpClientWrapperMock.Object);
+            var apiClient = new ApiClient(HttpClientWrapperMock.Object);
             var expected = new User();
 
             //Act
@@ -265,11 +265,11 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess.Tests
             return await Task.FromResult(httpResponseMessage);
         }
 
-        private async Task<Mock<IHttpClientWrapper>> SetUpMockHttpClientWrapperAsync(Task<HttpResponseMessage> stubbedResponseMessage)
+        private async Task<Mock<IHttpClientWrapper>> SetUpMockHttpClientWrapper(Task<HttpResponseMessage> stubbedResponseMessage)
         {
-            httpClientWrapperMock.Setup(x => x.GetAsync(It.IsAny<Uri>(),
+            HttpClientWrapperMock.Setup(x => x.GetAsync(It.IsAny<Uri>(),
                 It.IsAny<HttpRequestMessage>())).Returns(stubbedResponseMessage);
-            return httpClientWrapperMock;
+            return HttpClientWrapperMock;
         }
     }
 }

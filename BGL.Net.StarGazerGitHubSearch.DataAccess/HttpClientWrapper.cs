@@ -28,7 +28,15 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess
             requestMessage.Method = HttpMethod.Get;
             requestMessage.RequestUri = uri;
 
-            return await _httpClient.SendAsync(requestMessage).ConfigureAwait(false);
+            try
+            {
+                var clientResponse = await _httpClient.SendAsync(requestMessage).ConfigureAwait(false);
+                return clientResponse;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("HttpRequest failed", e);
+            }
         }
     }
 }
