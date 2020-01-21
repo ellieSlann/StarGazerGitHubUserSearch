@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
-using BGL.Net.StarGazerGitHubSearch.Models;
 
 namespace BGL.Net.StarGazerGitHubSearch.Controllers
 {
