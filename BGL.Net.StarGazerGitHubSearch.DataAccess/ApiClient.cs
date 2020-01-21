@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using BGL.Net.StarGazerGitHubSearch.Models;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace BGL.Net.StarGazerGitHubSearch.DataAccess
 {
@@ -21,11 +22,28 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess
         public async Task<List<RepoInformation>> GetRepoList(string searchUserName)
         {
             var uri = new Uri(GITHUBAPI + searchUserName + "/repos");
+
+            var responseMessage = await GetResponseMessage(uri);
+            var responseContent = await responseMessage.Content.ReadAsStringAsync();
+
+            var repos = JsonConvert.DeserializeObject<List<RepoInformation>>(responseContent.ToString());
+            var topFiveRepos = GetTopFiveRepos(repos);
+            return topFiveRepos;
+        }
+
+        private static List<RepoInformation> GetTopFiveRepos(List<RepoInformation> repos)
+        {
+            var orderedRepoList = from r in repos
+                                  orderby r.StargazersCount descending
+                                  select r;
+
+            return orderedRepoList.Take(5).ToList();
+        }
+
+        private async Task<HttpResponseMessage> GetResponseMessage(Uri uri)
+        {
             var httpRequestMessage = new HttpRequestMessage();
-            var responseMessage = await _wrapper.GetAsync(uri, httpRequestMessage).ConfigureAwait(false);
-            var repoResponseContent = await responseMessage.Content.ReadAsStringAsync();
-            var repos = JsonConvert.DeserializeObject<List<RepoInformation>>(repoResponseContent.ToString());
-            return repos;
+            return await _wrapper.GetAsync(uri, httpRequestMessage).ConfigureAwait(false);
         }
 
         public async Task<User> GetUser(string searchUserName)
@@ -35,8 +53,8 @@ namespace BGL.Net.StarGazerGitHubSearch.DataAccess
                 return new User();
             }
             var uri = new Uri(GITHUBAPI + searchUserName);
-            var httpRequestMessage = new HttpRequestMessage();
-            var responseMessage = await _wrapper.GetAsync(uri, httpRequestMessage).ConfigureAwait(false);
+
+            var responseMessage = await GetResponseMessage(uri);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var responseContent = await responseMessage.Content.ReadAsStringAsync();

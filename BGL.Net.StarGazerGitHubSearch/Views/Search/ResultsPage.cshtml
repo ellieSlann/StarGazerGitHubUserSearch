@@ -63,54 +63,56 @@
                 <td><img src="@Url.Content(Model.AvatarUrl)" style="height:100px; width:100px " alt="Image" /></td>
 
 
-            </tr
+            </tr>
         </table>
+        <br />
+        <br />
         <br />
         <table>
 
-         <tr>
-             <th>name</th>
-             <th>ID</th>
-             <th class="description">Description</th>
-             <th>StarGazer_Count</th>
+            <tr>
+                <th>Repository Name</th>
+                <th>ID</th>
+                <th class="description">Description</th>
+                <th>StarGazer_Count</th>
 
-         </tr>
-                @{ 
-                    int i = 0;
+            </tr>
+            @{
+                int i = 0;
 
-                    while (i < 5)
+                while (i < 5)
+                {
+
+                    foreach (var repository in Model.RepoList)
                     {
-
-                        foreach (var repository in Model.RepoList)
                         {
+                            <tr>
+                                <td> @repository.Name</td>
+
+                                <td> @repository.Id</td>
+
+                                <td id="Description"> @repository.Description</td>
+
+                                <td> @repository.StargazersCount</td>
+                            </tr>
+                            i++;
+
+                            if (i > 5)
                             {
-                        <tr>
-                            <td> @repository.Name</td>
-                            
-                            <td> @repository.Id</td>
-                            
-                            <td id="Description"> @repository.Description</td>
-                         
-                            <td> @repository.StargazersCount</td>
-                        </tr>
-                                i++;
 
-                                if (i > 5)
-                                {
-
-                                    break;
-                                }
+                                break;
                             }
                         }
                     }
+                }
             }
         </table>
-            @using (Html.BeginForm())
-            {
-                <br />
-                <br />
-                <input type="button" value="Return" onclick="location.href='@Url.Action("Index", "Search")'" />
-            }
-        </div>
+        @using (Html.BeginForm())
+        {
+            <br />
+            <br />
+            <input type="button" value="Return to Search" onclick="location.href='@Url.Action("Index", "Search")'" />
+        }
+    </div>
 </body>
 </html>  
